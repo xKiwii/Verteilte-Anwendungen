@@ -5,67 +5,57 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * Main class taking care of program execution. 
- * Creates a server socket and handles connections.
+ * Worker Thread to handle an incoming connection.
  * 
  * @author Jenny
  *
  */
-public class TimeService {
-	
-	/**
-	 * Server port this service is listening on.
-	 */
-	public static final int PORT = 75;
+public class HandleConnection implements Runnable {
 
 	/**
-	 * Entrance point for the program execution.
-	 * Creates a sever socket which is listening on port (constant #PORT) 
-	 * Blocks until a connection is established and only handles one connection at once.
-	 * 
-	 * @param args Command line arguments
-	 * @throws IOException
+	 * Socket that the client is connected to
 	 */
-	public static void main(String[] args) throws IOException{
+	private Socket client;
+	
+	/**
+	 * Creates a new HandleConnection object and initializes variables.
+	 * 
+	 * @param clientSocket Socket that the client is connected to
+	 */
+	public HandleConnection(Socket clientSocket){
+		this.client = clientSocket;
 		
-		ServerSocket serverSocket = new ServerSocket(PORT);
+	}
+	
+	/**
+	 * Calls HandleConnection#{@link HandleConnection}.
+	 * 
+	 *
+	 * @see		Thread#run()
+	 */
+	@Override
+	public void run() {
 		
-		while(true) {
-			Socket client = null;
-			
-			try {
-				client = serverSocket.accept();
-				handleConnection(client);
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-			finally {
-				 if(client != null) {
-					try { 
-						client.close(); 
-						System.out.println("Verbindung getrennt!");
-					} 
-					catch (IOException e) {}
-				} 
-					
-			}
+		try {
+			handleConnection(client);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		
 	}
 	
 	
+
 	/**
 	 * Is hearing for line commands and handles them.
 	 * 
 	 * @param client The socket that the client is connected to.
 	 * @throws IOException
 	 */
-	private static void handleConnection(Socket client) throws IOException{
+	private void handleConnection(Socket client) throws IOException{
 		
 		OutputStream output = client.getOutputStream();
 		BufferedWriter writer= new BufferedWriter(new OutputStreamWriter(output));
@@ -107,5 +97,16 @@ public class TimeService {
 		}
 		
 		writer.close();
+		
+		
+		if(client != null) {
+			try { 
+				System.out.println(client.getRemoteSocketAddress() + ": Verbindung getrennt!");
+				client.close();
+			} 
+			catch (IOException e) {}
+		} 
+		
 	}
+
 }
