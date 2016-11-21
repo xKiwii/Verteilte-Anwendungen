@@ -24,6 +24,8 @@ public class Random extends HttpServlet {
 		int a;
 		int b;
 		
+		Integer counter = 1;
+		
 		if((lowerInt == null) || (upperInt == null)){
 			response.sendRedirect("/OPWebApp/invalidvalues.html");
 			// throw new IllegalArgumentException("Missing input"); TODO: Eigene Expection udn in web.xml error handling
@@ -38,14 +40,22 @@ public class Random extends HttpServlet {
 				//throw new IllegalArgumentException("Invalid input, upper must be larger than lower.");
 			}
 			
+			if (request.getSession().getAttribute("counter") != null) {
+				counter = ((Integer) request.getSession().getAttribute("counter")) + 1;
+			}
+
+			
+			request.getSession().setAttribute("counter", counter);
+			
 			response.setContentType("text/html");
 			response.getWriter().println("Zufallszahl: " + (a + Math.round((Math.random() * (b - a)))) + "<br />");
+			response.getWriter().println("<br/> Sie rufen diese Seite zum "+ counter + " Mal auf.");
 			
 		} catch (NumberFormatException e) {
 			response.sendRedirect("/OPWebApp/invalidvalues.html");
 			//throw new IllegalArgumentException("Invalid input", e);
 		}
-		
+			
 		
 	}
 }
