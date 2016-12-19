@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Kartenverkauf</title>
+</head>
+<body>
+<h1>Verkauf eines freien Tickets</h1>
+
+<form method="POST" action="Operation">
+	<input type="hidden" name="operation" value="verkaufFreiesTicket">
+  	<label for="sitzplatznummer">Sitzplatznummer</label> <input type="number" name="sitzplatznummer" required/>
+    <input type="submit" value="kaufen"/>
+</form>
+
+</body>
+</html>
