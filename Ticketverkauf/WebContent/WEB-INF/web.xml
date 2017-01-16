@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
-  
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list> 
@@ -9,5 +10,33 @@
   	<exception-type>webapp.OperationErrorException</exception-type>
   	<location>/Fehler.jsp</location>
   </error-page>
+  
+  	<taglib>
+		<taglib-uri>http://jakarta.apache.org/taglibs/core</taglib-uri>
+		<taglib-location>/WEB-INF/c.tld</taglib-location>
+	</taglib> 
+
+	<taglib>
+		<taglib-uri>http://jakarta.apache.org/taglibs/xml</taglib-uri>
+		<taglib-location>/WEB-INF/x.tld</taglib-location>
+	</taglib>
+
+	<taglib>
+		<taglib-uri>http://jakarta.apache.org/taglibs/I18n</taglib-uri>
+		<taglib-location>/WEB-INF/fmt.tld</taglib-location>
+	</taglib>
+
+	<taglib>
+		<taglib-uri>http://jakarta.apache.org/taglibs/sql</taglib-uri>
+		<taglib-location>/WEB-INF/sql.tld</taglib-location>
+	</taglib>
+
+	<taglib>
+		<taglib-uri>
+			http://jakarta.apache.org/taglibs/functions
+		</taglib-uri>
+		<taglib-location>/WEB-INF/fn.tld</taglib-location>
+	</taglib>
+  
   
 </web-app>

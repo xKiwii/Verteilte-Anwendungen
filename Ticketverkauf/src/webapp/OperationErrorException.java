@@ -46,6 +46,9 @@ public class OperationErrorException extends RuntimeException{
 	     	case FELDER_NICHT_AUSGEFUELLT:
 	     		errorText = "Nicht alle benötigten Felder wurden korrekt ausgefüllt.";
 	     		break;
+	     	case DATENUEBERTRAGUNG:
+	     		errorText = "Fehler bei Datenübertragung";
+	     		break;
 	     	default:
 	     		errorText = "Es ist ein Fehler aufgetreten";
 		 }

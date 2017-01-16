@@ -1,6 +1,8 @@
 <%@page import="webapp.Kartenverkauf,webapp.Sitzplatz,webapp.Zustaende" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -27,7 +29,7 @@
 						%></tr><tr> <%
 					}
 					
-					switch(sitzplaetze[i].getZustand()){
+					switch(kartenverkauf.getZustand(i)){
 						case FREI:
 							%> <td><%=i+1%></td> <% 
 							break;
@@ -64,7 +66,14 @@
 			</td>
 		</tr>
 	</table>
-	Reservierungen können <%=kartenverkauf.getReservationStatus() ? "noch" : "nicht mehr" %> angenommen werden.
+	
+	<div class="ReservierungsListe">
+	
+
+	</div>
+	
+	
+	Reservierungen können <%=kartenverkauf.getReservationEnabledStatus() ? "noch" : "nicht mehr" %> angenommen werden.
 
 	<p />
 	<a href="Verkauf_eines_freien_Tickets.html">Verkauf eines freien Tickets</a>
@@ -77,7 +86,7 @@
 	<p />
 	<a href="Reservierungen_aufheben.html">Reservierungen aufheben</a>
 	
-	<p><%=kartenverkauf.toString() %></p>
+
 	
 </body>
 </html>
